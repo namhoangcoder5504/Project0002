@@ -1,5 +1,6 @@
 package com.example.project0002.controller;
 
+import com.example.project0002.dto.LoginDTO;
 import com.example.project0002.model.User;
 import com.example.project0002.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
     @Autowired
     private UserService userService;
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody LoginDTO request) {
+        User user = userService.login(request);
+        return ResponseEntity.ok(user);
+    }
 
     // Create
     @PostMapping

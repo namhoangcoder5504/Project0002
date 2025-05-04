@@ -1,5 +1,6 @@
 package com.example.project0002.service;
 
+import com.example.project0002.dto.LoginDTO;
 import com.example.project0002.model.User;
 import com.example.project0002.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,19 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
+
+    public User login(LoginDTO request) {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy user với username: " + request.getUsername()));
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new IllegalArgumentException("Mật khẩu không đúng!");
+        }
+
+        return user;
+    }
 
     // Create
     public User createUser(User user) {
