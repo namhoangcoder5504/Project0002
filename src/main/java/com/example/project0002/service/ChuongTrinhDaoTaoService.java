@@ -29,6 +29,7 @@ public class ChuongTrinhDaoTaoService {
         // Kiểm tra ngành học tồn tại
         NganhHoc nganhHoc = nganhHocRepository.findById(chuongTrinhDaoTao.getNganhHoc().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ngành học với ID: " + chuongTrinhDaoTao.getNganhHoc().getId()));
+
         chuongTrinhDaoTao.setNganhHoc(nganhHoc);
 
         return chuongTrinhDaoTaoRepository.save(chuongTrinhDaoTao);
@@ -78,5 +79,9 @@ public class ChuongTrinhDaoTaoService {
         ChuongTrinhDaoTao chuongTrinh = chuongTrinhDaoTaoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy chương trình đào tạo với ID: " + id));
         chuongTrinhDaoTaoRepository.delete(chuongTrinh);
+    }
+
+    public List<ChuongTrinhDaoTao> getCTDTByNganhHocId(String id) {
+        return chuongTrinhDaoTaoRepository.findByNganhHoc_Id(id);
     }
 }

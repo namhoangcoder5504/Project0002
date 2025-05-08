@@ -49,4 +49,11 @@ public class DeCuongChiTietController {
         deCuongChiTietService.deleteDeCuongChiTiet(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Get by HocPhan ID
+    @GetMapping("/hocphan/{hocPhanId}")
+    public ResponseEntity<List<DeCuongChiTiet>> getDeCuongChiTietByHocPhan(@PathVariable String hocPhanId) {
+        List<DeCuongChiTiet> deCuongChiTietList = deCuongChiTietService.getDeCuongChiTietByHocPhan(hocPhanId);
+        return ResponseEntity.ok(deCuongChiTietList);
+    }
 }

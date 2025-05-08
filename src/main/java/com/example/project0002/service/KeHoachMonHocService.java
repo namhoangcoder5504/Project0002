@@ -65,4 +65,8 @@ public class KeHoachMonHocService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy kế hoạch môn học với ID: " + id));
         keHoachMonHocRepository.delete(keHoachMonHoc);
     }
+
+    public List<KeHoachMonHoc> getKeHoachMonHocByNamHocAndHocPhan(int namHoc, String hocPhanId) {
+        return keHoachMonHocRepository.findByNamHocAndHocPhan_Id(namHoc, hocPhanId);
+    }
 }

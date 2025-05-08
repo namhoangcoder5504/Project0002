@@ -77,4 +77,11 @@ public class HocPhanService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy học phần với ID: " + id));
         hocPhanRepository.delete(hocPhan);
     }
+
+    public List<HocPhan> getHocPhanByNganhHoc(String id) {
+        NganhHoc nganhHoc = nganhHocRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ngành học với ID: " + id));
+
+        return hocPhanRepository.findByNganhHoc_Id(id);
+    }
 }

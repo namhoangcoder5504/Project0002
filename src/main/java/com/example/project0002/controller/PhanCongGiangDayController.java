@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/phanconggiangday")
 public class PhanCongGiangDayController {
-
     @Autowired
     private PhanCongGiangDayService phanCongGiangDayService;
 
@@ -48,5 +47,19 @@ public class PhanCongGiangDayController {
     public ResponseEntity<Void> deletePhanCongGiangDay(@PathVariable String id) {
         phanCongGiangDayService.deletePhanCongGiangDay(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Search
+    @GetMapping("/search")
+    public ResponseEntity<List<PhanCongGiangDay>> searchPhanCongGiangDay(@RequestParam String query) {
+        List<PhanCongGiangDay> results = phanCongGiangDayService.searchPhanCongGiangDay(query);
+        return ResponseEntity.ok(results);
+    }
+
+    // Get GiangVien PhanCongGiangDay by ID
+    @GetMapping("/giangvien/{id}")
+    public ResponseEntity<List<PhanCongGiangDay>> getGiangVienPhanConGiangDayById(@PathVariable String id) {
+        List<PhanCongGiangDay> results = phanCongGiangDayService.getGiangVienPhanConGiangDayById(id);
+        return ResponseEntity.ok(results);
     }
 }

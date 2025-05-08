@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/giangvien")
 public class GiangVienController {
-
     @Autowired
     private GiangVienService giangVienService;
 
@@ -48,5 +47,12 @@ public class GiangVienController {
     public ResponseEntity<Void> deleteGiangVien(@PathVariable String id) {
         giangVienService.deleteGiangVien(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Search
+    @GetMapping("/search")
+    public ResponseEntity<List<GiangVien>> searchGiangVien(@RequestParam String query) {
+        List<GiangVien> giangVienList = giangVienService.searchGiangVien(query);
+        return ResponseEntity.ok(giangVienList);
     }
 }

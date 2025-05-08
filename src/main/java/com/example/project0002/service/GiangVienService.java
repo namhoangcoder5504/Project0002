@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class GiangVienService {
-
     @Autowired
     private GiangVienRepository giangVienRepository;
 
@@ -92,5 +91,10 @@ public class GiangVienService {
         GiangVien giangVien = giangVienRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy giảng viên với ID: " + id));
         giangVienRepository.delete(giangVien);
+    }
+
+    // Search
+    public List<GiangVien> searchGiangVien(String keyword) {
+        return giangVienRepository.findByHoTenAndChuyenMonContainingIgnoreCase(keyword, keyword);
     }
 }

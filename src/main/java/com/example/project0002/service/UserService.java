@@ -71,4 +71,9 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy user với ID: " + id));
         userRepository.delete(user);
     }
+
+    // Search
+    public List<User> searchUsers(String username, String email) {
+        return userRepository.findByUsernameAndEmail(username, email);
+    }
 }

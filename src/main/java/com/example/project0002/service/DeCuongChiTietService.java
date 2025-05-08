@@ -65,4 +65,8 @@ public class DeCuongChiTietService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy đề cương chi tiết với ID: " + id));
         deCuongChiTietRepository.delete(deCuongChiTiet);
     }
+
+    public List<DeCuongChiTiet> getDeCuongChiTietByHocPhan(String hocPhanId) {
+        return deCuongChiTietRepository.findByHocPhan_Id(hocPhanId);
+    }
 }

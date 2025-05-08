@@ -55,4 +55,11 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Find by username and email
+    @GetMapping("/find")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam String username, @RequestParam String email) {
+        List<User> users = userService.searchUsers(username, email);
+        return ResponseEntity.ok(users);
+    }
 }

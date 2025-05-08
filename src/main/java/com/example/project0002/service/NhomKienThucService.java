@@ -28,7 +28,9 @@ public class NhomKienThucService {
 
         // Kiểm tra chương trình đào tạo tồn tại
         ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoRepository.findById(nhomKienThuc.getChuongTrinhDaoTao().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy chương trình đào tạo với ID: " + nhomKienThuc.getChuongTrinhDaoTao().getId()));
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Không tìm thấy chương trình đào tạo với ID: " + nhomKienThuc.getChuongTrinhDaoTao().getId()));
+
         nhomKienThuc.setChuongTrinhDaoTao(chuongTrinhDaoTao);
 
         return nhomKienThucRepository.save(nhomKienThuc);
@@ -63,7 +65,9 @@ public class NhomKienThucService {
         // Cập nhật chương trình đào tạo nếu có
         if (nhomKienThucDetails.getChuongTrinhDaoTao() != null) {
             ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoRepository.findById(nhomKienThucDetails.getChuongTrinhDaoTao().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy chương trình đào tạo với ID: " + nhomKienThucDetails.getChuongTrinhDaoTao().getId()));
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Không tìm thấy chương trình đào tạo với ID: " + nhomKienThucDetails.getChuongTrinhDaoTao().getId()));
+
             nhomKienThuc.setChuongTrinhDaoTao(chuongTrinhDaoTao);
         }
 
@@ -75,5 +79,9 @@ public class NhomKienThucService {
         NhomKienThuc nhomKienThuc = nhomKienThucRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy nhóm kiến thức với ID: " + id));
         nhomKienThucRepository.delete(nhomKienThuc);
+    }
+
+    public List<NhomKienThuc> getNhomKienThucByChuongTrinhDaoTaoId(String id) {
+        return nhomKienThucRepository.findByChuongTrinhDaoTao_Id(id);
     }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class PhanCongGiangDayService {
-
     @Autowired
     private PhanCongGiangDayRepository phanCongGiangDayRepository;
 
@@ -49,7 +48,10 @@ public class PhanCongGiangDayService {
         // Cập nhật giảng viên nếu có
         if (phanCongGiangDayDetails.getGiangVien() != null) {
             GiangVien giangVien = giangVienRepository.findById(phanCongGiangDayDetails.getGiangVien().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy giảng viên với ID: " + phanCongGiangDayDetails.getGiangVien().getId()));
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Không tìm thấy giảng viên với ID: " + phanCongGiangDayDetails.getGiangVien().getId())
+                    );
+
             phanCongGiangDay.setGiangVien(giangVien);
         }
 
@@ -61,5 +63,15 @@ public class PhanCongGiangDayService {
         PhanCongGiangDay phanCongGiangDay = phanCongGiangDayRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy phân công giảng dạy với ID: " + id));
         phanCongGiangDayRepository.delete(phanCongGiangDay);
+    }
+
+    // Search
+    public List<PhanCongGiangDay> searchPhanCongGiangDay(String query) {
+        return phanCongGiangDayRepository.findByGiangVien_HoTen_AndSoTietContainingIgnoreCase(query, query);
+    }
+
+    // Get GiangVien PhanCongGiangDay by ID
+    public List<PhanCongGiangDay> getGiangVienPhanConGiangDayById(String id) {
+        return phanCongGiangDayRepository.findByGiangVien_Id(id);
     }
 }

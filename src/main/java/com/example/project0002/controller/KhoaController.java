@@ -49,4 +49,11 @@ public class KhoaController {
         khoaService.deleteKhoa(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Search
+    @GetMapping("/search")
+    public ResponseEntity<List<Khoa>> searchKhoa(@RequestParam String ten) {
+        List<Khoa> khoaList = khoaService.searchKhoa(ten);
+        return ResponseEntity.ok(khoaList);
+    }
 }

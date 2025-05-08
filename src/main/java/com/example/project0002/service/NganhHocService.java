@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class NganhHocService {
-
     @Autowired
     private NganhHocRepository nganhHocRepository;
 
@@ -75,5 +74,15 @@ public class NganhHocService {
         NganhHoc nganhHoc = nganhHocRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ngành học với ID: " + id));
         nganhHocRepository.delete(nganhHoc);
+    }
+
+    // Search
+    public List<NganhHoc> searchNganhHoc(String query) {
+        return nganhHocRepository.findByTenAndKhoa_TenContainingIgnoreCase(query, query);
+    }
+
+    // Get by Khoa ID
+    public List<NganhHoc> getNganhHocByKhoaId(String khoaId) {
+        return nganhHocRepository.findByKhoa_Id(khoaId);
     }
 }

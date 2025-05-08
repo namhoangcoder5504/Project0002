@@ -49,4 +49,11 @@ public class CotDiemController {
         cotDiemService.deleteCotDiem(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Get by DeCuongChiTiet ID
+    @GetMapping("/deCuongChiTiet/{deCuongChiTietId}")
+    public ResponseEntity<List<CotDiem>> getCotDiemByDeCuongChiTiet(@PathVariable String deCuongChiTietId) {
+        List<CotDiem> cotDiemList = cotDiemService.getCotDiemByDeCuongChiTiet(deCuongChiTietId);
+        return ResponseEntity.ok(cotDiemList);
+    }
 }

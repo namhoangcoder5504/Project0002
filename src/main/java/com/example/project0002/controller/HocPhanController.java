@@ -49,4 +49,10 @@ public class HocPhanController {
         hocPhanService.deleteHocPhan(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("nganh-hoc/{nganhHocId}")
+    public ResponseEntity<List<HocPhan>> getHocPhanByNganhHoc(@PathVariable String nganhHocId) {
+        List<HocPhan> hocPhanList = hocPhanService.getHocPhanByNganhHoc(nganhHocId);
+        return ResponseEntity.ok(hocPhanList);
+    }
 }

@@ -62,7 +62,9 @@ public class CotDiemService {
         // Cập nhật đề cương chi tiết nếu có
         if (cotDiemDetails.getDeCuongChiTiet() != null) {
             DeCuongChiTiet deCuongChiTiet = deCuongChiTietRepository.findById(cotDiemDetails.getDeCuongChiTiet().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy đề cương chi tiết với ID: " + cotDiemDetails.getDeCuongChiTiet().getId()));
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Không tìm thấy đề cương chi tiết với ID: " + cotDiemDetails.getDeCuongChiTiet().getId()));
+
             cotDiem.setDeCuongChiTiet(deCuongChiTiet);
         }
 
@@ -74,5 +76,12 @@ public class CotDiemService {
         CotDiem cotDiem = cotDiemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy cột điểm với ID: " + id));
         cotDiemRepository.delete(cotDiem);
+    }
+
+    public List<CotDiem> getCotDiemByDeCuongChiTiet(String deCuongChiTietId) {
+        DeCuongChiTiet deCuongChiTiet = deCuongChiTietRepository.findById(deCuongChiTietId)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy đề cương chi tiết với ID: " + deCuongChiTietId));
+
+        return cotDiemRepository.findByDeCuongChiTiet_Id(deCuongChiTietId);
     }
 }

@@ -49,4 +49,11 @@ public class NhomKienThucController {
         nhomKienThucService.deleteNhomKienThuc(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Get by ChuongTrinhDaoTao ID
+    @GetMapping("/chuongtrinhdaotao/{chuongTrinhDaoTaoId}")
+    public ResponseEntity<List<NhomKienThuc>> getNhomKienThucByChuongTrinhDaoTaoId(@PathVariable String chuongTrinhDaoTaoId) {
+        List<NhomKienThuc> nhomKienThucList = nhomKienThucService.getNhomKienThucByChuongTrinhDaoTaoId(chuongTrinhDaoTaoId);
+        return ResponseEntity.ok(nhomKienThucList);
+    }
 }

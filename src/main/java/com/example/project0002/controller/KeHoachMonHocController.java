@@ -49,4 +49,11 @@ public class KeHoachMonHocController {
         keHoachMonHocService.deleteKeHoachMonHoc(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Get by NamHoc and HocPhan
+    @GetMapping
+    public ResponseEntity<List<KeHoachMonHoc>> getKeHoachMonHocByNamHocAndHocPhan(@RequestParam int namHoc, @RequestParam String hocPhanId) {
+        List<KeHoachMonHoc> keHoachMonHocList = keHoachMonHocService.getKeHoachMonHocByNamHocAndHocPhan(namHoc, hocPhanId);
+        return ResponseEntity.ok(keHoachMonHocList);
+    }
 }

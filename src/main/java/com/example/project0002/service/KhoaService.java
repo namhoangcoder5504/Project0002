@@ -56,4 +56,9 @@ public class KhoaService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy khoa với ID: " + id));
         khoaRepository.delete(khoa);
     }
+
+    // Search
+    public List<Khoa> searchKhoa(String keyword) {
+        return khoaRepository.findByTenContainingIgnoreCase(keyword);
+    }
 }

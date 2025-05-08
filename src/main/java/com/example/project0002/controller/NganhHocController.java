@@ -49,4 +49,18 @@ public class NganhHocController {
         nganhHocService.deleteNganhHoc(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Search
+    @GetMapping("/search")
+    public ResponseEntity<List<NganhHoc>> searchNganhHoc(@RequestParam String query) {
+        List<NganhHoc> nganhHocList = nganhHocService.searchNganhHoc(query);
+        return ResponseEntity.ok(nganhHocList);
+    }
+
+    // Get by Khoa ID
+    @GetMapping("/khoa/{khoaId}")
+    public ResponseEntity<List<NganhHoc>> getNganhHocByKhoaId(@PathVariable String khoaId) {
+        List<NganhHoc> nganhHocList = nganhHocService.getNganhHocByKhoaId(khoaId);
+        return ResponseEntity.ok(nganhHocList);
+    }
 }
